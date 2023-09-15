@@ -32,21 +32,21 @@ st.set_page_config(page_title="PsychoAI", page_icon=":brain:", layout="wide")
 ####################
 @st.cache_resource
 def lgbm_load():
-    lgbm_model = joblib.load(r'C:\Users\K\PycharmProjects\pythonProject\lgbm.pkl')
+    lgbm_model = joblib.load(r'C:\Users\K\PycharmProjects\psychoai\lgbm.pkl')
     return lgbm_model
 
 lgbm_model = lgbm_load()
 
 @st.cache_resource
 def tf_load():
-    tf_model = load_model(r'C:\Users\K\PycharmProjects\pythonProject\model_clean.h5',
+    tf_model = load_model(r'C:\Users\K\PycharmProjects\psychoai\model_clean.h5',
                               custom_objects={'KerasLayer': hub.KerasLayer})
     return tf_model
 
 
 tf_model = tf_load()
 
-tfidf = TfidfVectorizer(vocabulary=pickle.load(open(r"C:\Users\K\PycharmProjects\pythonProject\feature.pkl", "rb")))
+tfidf = TfidfVectorizer(vocabulary=pickle.load(open(r"C:\Users\K\PycharmProjects\psychoai\feature.pkl", "rb")))
 
 
 
