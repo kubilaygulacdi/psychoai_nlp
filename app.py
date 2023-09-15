@@ -10,8 +10,7 @@ import pandas as pd
 import numpy as np
 import re
 from functools import lru_cache
-pd.set_option('display.max_columns', None)
-pd.set_option('display.width', 200)
+
 import pickle
 import spacy
 import contractions as contract
