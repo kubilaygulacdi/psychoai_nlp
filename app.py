@@ -1,3 +1,4 @@
+# Importing libraries
 import streamlit as st
 import requests
 import joblib
@@ -10,7 +11,6 @@ import pandas as pd
 import numpy as np
 import re
 from functools import lru_cache
-
 import pickle
 import spacy
 import contractions as contract
@@ -67,6 +67,7 @@ def load_nlp_and_sym_spell():
 
 nlp, sym_spell = load_nlp_and_sym_spell()
 
+# text preprocessing
 
 def fix_spelling(text):
     suggestions = sym_spell.lookup_compound(text, max_edit_distance=2)
