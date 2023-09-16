@@ -13,3 +13,5 @@ symspellpy==6.7.7
 tensorflow==2.13.0
 tensorflow_hub==0.14.0
 tensorflow_text==2.13.0
+lightgbm
+en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.3.1/en_core_web_sm-2.3.1.tar.gz
