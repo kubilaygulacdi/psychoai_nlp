@@ -45,6 +45,7 @@ def tf_load():
 
 tf_model = tf_load()
 
+@st.cache_resource
 tfidf = TfidfVectorizer(vocabulary=pickle.load(open("feature.pkl", "rb")))
 
 
@@ -106,7 +107,7 @@ def fix_lengthening(text):
     pattern = re.compile(r'(.)\1{2,}')
     return pattern.sub(r'\1\1', text)
 
-
+@st.cache
 def text_preprocessing(text, contractions=True, convert_num=True,
                        extra_whitespace=True, lemmatization=True, lowercase=True,
                        url=True, symbols_digits=True, special_chars=True,
@@ -164,6 +165,7 @@ def text_preprocessing(text, contractions=True, convert_num=True,
 # STREAMLIT
 ###################################
 
+@st.cache_resource
 image = Image.open("img.png")
 
 
