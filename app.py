@@ -45,7 +45,6 @@ def tf_load():
 
 tf_model = tf_load()
 
-@st.cache_resource
 tfidf = TfidfVectorizer(vocabulary=pickle.load(open("feature.pkl", "rb")))
 
 
