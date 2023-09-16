@@ -45,6 +45,7 @@ def tf_load():
 
 tf_model = tf_load()
 
+
 tfidf = TfidfVectorizer(vocabulary=pickle.load(open("feature.pkl", "rb")))
 
 
@@ -53,7 +54,7 @@ tfidf = TfidfVectorizer(vocabulary=pickle.load(open("feature.pkl", "rb")))
 # DATA PREPROCESS
 ###############################
 
-@st.cache_data
+@st.cache_resource
 def load_nlp_and_sym_spell():
     nlp = spacy.load("en_core_web_sm")
     sym_spell = SymSpell(max_dictionary_edit_distance=2, prefix_length=7)
@@ -69,45 +70,44 @@ nlp, sym_spell = load_nlp_and_sym_spell()
 
 # text preprocessing
 
-@st.cache
 def fix_spelling(text):
     suggestions = sym_spell.lookup_compound(text, max_edit_distance=2)
     correctedtext = suggestions[0].term
     return correctedtext
 
-@st.cache
+
 def remove_whitespace(text):
     text = text.strip()
     return ' '.join(text.split())
 
-@st.cache
+
 def remove_url(text):
     return re.sub(r'http\S+', '', text)
 
-@st.cache
+
 def remove_mail(text):
     return re.sub(r'\S+@\S+', '', text)
 
-@st.cache
+
 def remove_symbols_digits(text):
     return re.sub('[^a-zA-Z\s]', ' ', text)
 
-@st.cache
+
 def remove_emoji(text):
     return re.sub(
         r'[\U0001F600-\U0001F64F\U0001F300-\U0001F5FF\U0001F680-\U0001F6FF\U0001F700-\U0001F77F\U0001F780-\U0001F7FF\U0001F800-\U0001F8FF\U0001F900-\U0001F9FF\U0001FA00-\U0001FA6F\U0001FA70-\U0001FAFF\U0001FB00-\U0001FBFF\U0001FE00-\U0001FE0F\U0001F004]+',
         '', text)
 
-@st.cache
+
 def remove_special(text):
     return text.replace('\r', ' ').replace('\n', ' ').replace('    ', ' ').replace('"', '')
 
-@st.cache
+
 def fix_lengthening(text):
     pattern = re.compile(r'(.)\1{2,}')
     return pattern.sub(r'\1\1', text)
 
-@st.cache
+@st.cache_data
 def text_preprocessing(text, contractions=True, convert_num=True,
                        extra_whitespace=True, lemmatization=True, lowercase=True,
                        url=True, symbols_digits=True, special_chars=True,
@@ -166,6 +166,7 @@ def text_preprocessing(text, contractions=True, convert_num=True,
 ###################################
 
 image = Image.open("img.png")
+
 
 
 with st.container():
