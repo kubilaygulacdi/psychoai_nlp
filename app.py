@@ -164,7 +164,6 @@ def text_preprocessing(text, contractions=True, convert_num=True,
 # STREAMLIT
 ###################################
 
-@st.cache_resource
 image = Image.open("img.png")
 
 
